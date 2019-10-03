@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar color='primary'>
+    <ion-title>会員情報登録</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <section>
+    <label class='explanation-main'>会員情報にあたり、以下を入力ください。<ion-text color='danger'>*</ion-text>必須入力</label>
+    <form [formGroup]='quotationForm'>
+      <label class='item-label'><ion-text>名前</ion-text><sup><ion-text color='danger'>*</ion-text></sup></label>
+      <ion-item>
+        <ion-input formControlName='lastNameKanji' type='text' placeholder='姓'></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input formControlName='firstNameKanji' type='text' placeholder='名'></ion-input>
+      </ion-item>
+      <label class='item-label'><ion-text>性別</ion-text><sup><ion-text color='danger'>*</ion-text></sup></label>
+      <ion-item>
+        <ion-select formControlName='gender'>
+          <ion-select-option value='male'>男</ion-select-option>
+          <ion-select-option value='female'>女</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <label class='item-label'><ion-text>生年月日</ion-text><sup><ion-text color='danger'>*</ion-text></sup></label>
+      <ion-item>
+        <ion-datetime formControlName='birthday' class='birthday' display-format='YYYY年 M月 D日'></ion-datetime>
+      </ion-item>
+      
+      <label class='item-label'>電話番号</label>
+      <div class='form-phone-container' padding-start padding-end>
+        <input formControlName='phone1' class='inline-block form-number-digit-4' type='tel' pattern='\d*'>
+        <span>-</span>
+        <input formControlName='phone2' class='inline-block form-number-digit-4' type='tel' pattern='\d*'>
+        <span>-</span>
+        <input formControlName='phone3' class='inline-block form-number-digit-4' type='tel' pattern='\d*'>
+      </div>
+
+      <label class='item-label'>E-mailアドレス</label>
+      <ion-item>
+        <ion-input formControlName='email' type='url' placeholder='xxxxx@xxx.com'></ion-input>
+      </ion-item>
+      
+      <label class='item-label'>住所</label>
+      <div class='form-zip-container' padding-start padding-end>
+        <span>〒</span>
+        <input formControlName='zip1' class='form-number-digit-3' type='tel' pattern='\d*'>
+        <span>-</span>
+        <input formControlName='zip2' class='form-number-digit-4' type='tel' pattern='\d*'>
+      </div>
+      <ion-item>
+        <ion-input formControlName='address1' type='text' placeholder='市区町村'></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input formControlName='address2' type='text' placeholder='番地以降'></ion-input>
+      </ion-item>
+      
+    </form>
+  </section>
+  <section class='btn-container'>
+    <ion-button color='primary' expand='block' class='submit-btn'>登録実施</ion-button>
+    <ion-button color='primary' expand='block' fill='outline' class='submit-btn'>キャンセル</ion-button>
+  </section>
+</ion-content>
