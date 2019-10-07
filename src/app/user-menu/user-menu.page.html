@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color='primary'>
+    <ion-title>会員メニュー</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-list>
+    <ion-list-header>
+      以下クリックして画面遷移ができます。
+    </ion-list-header>
+    <ion-item class='Menu-Item-1' lines="none" (click)='gotoUserInfo()'>
+      <ion-icon name="person"></ion-icon>
+      <ion-label>会員登録</ion-label>
+    </ion-item>
+    <ion-item class='Menu-Item-2' lines="none" (click)='gotoCheckIn()'>
+      <ion-icon name="add-circle"></ion-icon>
+      <ion-label>チェックイン</ion-label>
+    </ion-item>
+    <ion-item class='Menu-Item-3' lines="none">
+      <ion-icon name="baseball"></ion-icon>
+      <ion-label>ボール購入</ion-label>
+    </ion-item>
+    <ion-item class='Menu-Item-4' lines="none">
+      <ion-icon name="basket"></ion-icon>
+      <ion-label>食事注文</ion-label>
+    </ion-item>
+    <ion-item class='Menu-Item-5' lines="none">
+      <ion-icon name="exit"></ion-icon>
+      <ion-label>チェックアウト</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
