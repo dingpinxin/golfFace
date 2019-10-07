@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { NavController, LoadingController } from '@ionic/angular';
 import { take } from 'rxjs/operators'
@@ -31,7 +32,9 @@ export class UserInfoInputPage implements OnInit {
   email: FormControl;
 
   constructor(
-    private formBuilder: FormBuilder,) { 
+    private formBuilder: FormBuilder,
+    private navCtrl: NavController,
+    private _HTTP: HttpClient,) { 
     this.lastNameKanji = new FormControl(
       '姓', [Validators.required]
     )
@@ -94,6 +97,90 @@ export class UserInfoInputPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  cancel() {
+    this.navCtrl.navigateForward('user-menu');
+  }
+
+  retrieve() : void
+   {
+      this._HTTP
+      .get("http://localhost:3000/api/gallery/")
+      .subscribe((data : any) =>
+      {
+         // If the request was successful notify the user
+         console.log(data.records);
+      },
+      (error : any) =>
+      {
+         console.dir(error);
+      });
+   }
+
+  delete(){
+    // Retrieve the document ID from the supplied parameter and
+    // define the URL which triggers the node route for deleting the document
+    let recordID 		: string		= "5d9b0c07f1d6dc3f28f8cb05",
+        url       	: any      	 	= "http://localhost:3000/api/gallery/" + recordID;
+
+    // Use Angular's Http module's delete method
+    this._HTTP
+    .delete(url)
+    .subscribe((data : any) =>
+    {
+       // If the request was successful notify the user
+    },
+    (error : any) =>
+    {
+       console.dir(error);
+    });
+  }
+
+  update(){
+    let name: any        = "testXXXXXX",
+        description: any  = "description",
+        thumbnail: any  = "thumbnail",
+        displayed: any  = true,
+        headers: any		= new HttpHeaders({ 'Content-Type': 'application/json' }),
+        options: any	  = { name : name, description : description, thumbnail : thumbnail, displayed: displayed },
+        url: any      	= "http://localhost:3000/api/gallery";
+
+    // Use the HttpClient put method to update the existing record
+    this._HTTP
+    .put(url + '/' + "5d9b0c07f1d6dc3f28f8cb05", options, headers)
+    .subscribe((data : any) =>
+    {
+       // If the request was successful clear the form of data
+       // and notify the user
+    },
+    (error : any) =>
+    {
+       console.dir(error);
+    });
+  }
+
+  insert(){
+    let name: any        = "test1",
+        description: any  = "description",
+        thumbnail: any  = "thumbnail",
+        displayed: any  = true,
+        headers: any		= new HttpHeaders({ 'Content-Type': 'application/json' }),
+        options: any	  = { name : name, description : description, thumbnail : thumbnail, displayed: displayed },
+        url: any      	= "http://localhost:3000/api/gallery";
+
+    // Use the HttpClient post method to create a new record
+    this._HTTP
+    .post(url, options, headers)
+    .subscribe((data : any) =>
+    {
+       // If the request was successful clear the form of data
+       // and notify the user
+    },
+    (error : any) =>
+    {
+       console.dir(error);
+    });
   }
 
 }
