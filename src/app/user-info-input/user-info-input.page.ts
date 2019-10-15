@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { NavController, LoadingController } from '@ionic/angular';
-import { take } from 'rxjs/operators'
+import { Observable, of } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-info-input',
@@ -30,6 +31,8 @@ export class UserInfoInputPage implements OnInit {
   phone2: FormControl;
   phone3: FormControl;
   email: FormControl;
+
+  data : any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -97,6 +100,11 @@ export class UserInfoInputPage implements OnInit {
   }
 
   ngOnInit() {
+    this.retrieve_Obser_service()
+      .subscribe(res => {
+        this.data = res;
+        console.log(res);
+      });
   }
 
   cancel() {
@@ -117,6 +125,28 @@ export class UserInfoInputPage implements OnInit {
          console.dir(error);
       });
    }
+
+   retrieve_Obser_service (): Observable<any> {
+    return this._HTTP.get<any>("http://localhost:3000/api/gallery/")
+      .pipe(
+        tap(),
+        catchError(this.handleError([]))
+      );
+  }
+  
+  retrieve_Obser() {
+    console.log(this.data);
+  }
+
+  private handleError<T> (result?: T) {
+    return (error: any): Observable<T> => {
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
 
   delete(){
     // Retrieve the document ID from the supplied parameter and

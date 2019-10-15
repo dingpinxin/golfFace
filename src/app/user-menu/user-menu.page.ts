@@ -21,4 +21,8 @@ export class UserMenuPage implements OnInit {
   gotoCheckIn() {
     this.navCtrl.navigateForward('check-in');
   }
+
+  gotoPracticeBall() {
+    this.navCtrl.navigateForward('practice-balls-start');
+  }
 }

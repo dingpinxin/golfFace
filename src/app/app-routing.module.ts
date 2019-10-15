@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'check-in', loadChildren: './check-in/check-in.module#CheckInPageModule' },
   { path: 'check-in-success', loadChildren: './check-in-success/check-in-success.module#CheckInSuccessPageModule' },
   { path: 'user-menu', loadChildren: './user-menu/user-menu.module#UserMenuPageModule' },
+  { path: 'practice-balls-start', loadChildren: './practice-balls-start/practice-balls-start.module#PracticeBallsStartPageModule' },
 ];
 
 @NgModule({
