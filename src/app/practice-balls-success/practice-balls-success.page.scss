@@ -14,6 +14,13 @@ ion-row {
     padding-right: 1em;
 }
 
+ion-col {
+    padding-top: 2em;
+    padding-bottom: 2em;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
 ion-col > div .target{
     display:table-cell;
     vertical-align:middle;

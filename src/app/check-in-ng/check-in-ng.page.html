@@ -5,15 +5,6 @@
 </ion-header>
 
 <ion-content>
-     <!-- 写真エリア -->
-    <div *ngFor='let photo of this.photos; let index = index'>
-      <div class='img-div'>
-        <span class="example">・対象写真</span>
-      </div>
-      <div class='img-div'>
-        <img *ngIf='photo.image' [src]='photo.image'/>
-      </div>
-    </div>
     <ion-card>
       <ion-card-header>
         <ion-card-subtitle>2019年10月01日</ion-card-subtitle>

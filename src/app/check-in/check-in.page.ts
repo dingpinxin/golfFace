@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { ShareDataService } from 'src/app/providers/share-data.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-check-in',
@@ -9,15 +10,35 @@ import { ShareDataService } from 'src/app/providers/share-data.service';
 })
 export class CheckInPage implements OnInit {
 
-  constructor(
+  constructor(public alertController: AlertController,
     private navCtrl: NavController,
     private shareDataService: ShareDataService,) { }
 
   ngOnInit() {
   }
 
-  onChangeInput(event) {
-    this.commonOnChangeInput(event,this.applyEvent.bind(this));
+  async onChangeInput(event) {
+    const alert = await this.alertController.create({
+      header: '購入内容確認',
+      message: '認証成功とNG画面遷移を選択してください',
+      buttons: [
+        {
+          text: 'NG',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            this.navCtrl.navigateForward('check-in-ng');
+          }
+        }, {
+          text: '成功',
+          handler: () => {
+            this.commonOnChangeInput(event,this.applyEvent.bind(this));
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   applyEvent() {
