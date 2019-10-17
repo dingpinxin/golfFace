@@ -1,0 +1,25 @@
+ion-col > div {
+    background-color: #a6deff;
+    border: solid 1px #ddd;;
+    text-align: center;
+    height:100%;
+    display:table;
+    width:100%;
+    font-size: 3.0em;
+  }
+
+ion-row {
+    padding-top: 10em;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+ion-col > div .target{
+    display:table-cell;
+    vertical-align:middle;
+}
+
+ion-alert
+{
+ --background: red !important;
+}

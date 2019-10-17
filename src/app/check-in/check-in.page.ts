@@ -24,6 +24,14 @@ export class CheckInPage implements OnInit {
         this.navCtrl.navigateForward('check-in-success');
   }
 
+  onChangeInput_false(event) {
+    this.commonOnChangeInput(event,this.applyEvent_fail.bind(this));
+  }
+
+  applyEvent_fail() {
+        this.navCtrl.navigateForward('check-in-ng');
+  }
+
    /**
    * 選択された画像を取得する
    * @param event : 選択された画像の情報

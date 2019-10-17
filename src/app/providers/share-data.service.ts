@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class ShareDataService {
   
   private photos: { image : string }[];
+  private balls: number;
 
   constructor() { }
   
@@ -23,6 +24,16 @@ export class ShareDataService {
   getPhotos(){
     if(this.photos){
       return this.photos;
+    }
+  }
+
+  setBalls(balls){
+    this.balls = balls;
+  }
+
+  getballs(){
+    if(this.balls){
+      return this.balls;
     }
   }
 }
