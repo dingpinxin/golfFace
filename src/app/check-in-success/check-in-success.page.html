@@ -1,26 +1,17 @@
 <ion-header>
-  <ion-toolbar color='primary'>
-    <ion-title>ようこそ</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color='primary'>
+        <ion-title>ようこそ</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-     <!-- 写真エリア -->
-    <div *ngFor='let photo of this.photos; let index = index'>
-      <div class='img-div'>
-        <span class="example">・認証されたご本人の写真</span>
-      </div>
-      <div class='img-div'>
-        <img *ngIf='photo.image' [src]='photo.image'/>
-      </div>
-    </div>
     <ion-card>
-      <ion-card-header>
-        <ion-card-subtitle>2019年10月01日</ion-card-subtitle>
-        <ion-card-title color='success'>チェックイン成功しました。</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        田中太郎さま、ゴルフ場へようこそ！
-      </ion-card-content>
+        <ion-card-header>
+            <ion-card-subtitle>2019年10月01日</ion-card-subtitle>
+            <ion-card-title color='success'>チェックイン成功しました。</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            田中太郎さま、ゴルフ場へようこそ！
+        </ion-card-content>
     </ion-card>
 </ion-content>

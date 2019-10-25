@@ -4,6 +4,7 @@ import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 import { NavController, LoadingController } from '@ionic/angular';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { NecEvaService } from 'src/app/providers/nec-eva.service';
 
 @Component({
   selector: 'app-user-info-input',
@@ -37,7 +38,8 @@ export class UserInfoInputPage implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private navCtrl: NavController,
-    private _HTTP: HttpClient,) { 
+    private _HTTP: HttpClient,
+    private necEvaService: NecEvaService,) { 
     this.lastNameKanji = new FormControl(
       '姓', [Validators.required]
     )
@@ -213,4 +215,12 @@ export class UserInfoInputPage implements OnInit {
     });
   }
 
+  getCount(){
+    this.necEvaService.getPersonsCount().subscribe(res=>{
+      let count = res;
+      console.log(count);
+    }, error=>{
+      console.error(error);
+    })
+  }
 }

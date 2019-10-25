@@ -19,6 +19,6 @@ export class PracticeBallsBuyPage implements OnInit {
   }
 
   goNextPage(){
-    this.navCtrl.navigateForward('practice-balls-success');
+    this.navCtrl.navigateForward('practice-balls-start');
   }
 }
