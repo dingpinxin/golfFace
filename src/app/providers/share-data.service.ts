@@ -7,6 +7,7 @@ export class ShareDataService {
   
   private photos: { image : string };
   private balls: number;
+  private userName: string;
 
   constructor() { }
   
@@ -34,6 +35,16 @@ export class ShareDataService {
   getballs(){
     if(this.balls){
       return this.balls;
+    }
+  }
+  
+  setUserName(userName){
+    this.userName = userName;
+  }
+
+  getUserName(){
+    if(this.userName){
+      return this.userName;
     }
   }
 }

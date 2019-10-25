@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { take, catchError, concatMap, tap } from 'rxjs/operators';
 import { AlertOptions } from '@ionic/core';
 import { NavController,LoadingController } from '@ionic/angular';
-import { ShareDataService } from 'src/app/providers/share-data.service';
 import { AlertService } from 'src/app/providers/alert.service';
 
 @Injectable({
@@ -83,7 +82,7 @@ export class NecEvaService {
 
           }
         }),
-        catchError(err => this.handleError(err))
+        catchError(err => this.handleErrorImg(err))
       )
   }
 
@@ -113,27 +112,68 @@ export class NecEvaService {
     }
     return option;
   }
-
-  private _makeOptionsPostImage(params?: { [param: string]: string }) {
-    const option = {
-      headers: new HttpHeaders({
-        'Content-Type': 'multipart/form-data',
-        'Authorization': 'Basic cm9vdHVzZXI6cm9vdHVzZXI=',
-      })
-    }
-    if (params) {
-      option['params'] = params;
-    }
-    return option;
-  }
   
-  handleError(err){
+  handleErrorImg(err){
     console.log(err);
     return new Promise<any>(async (resolve, reject) => {
       const loading = await this.loadingCtrl.getTop();
       if(err.status.toString() === "401"){
         let opts: AlertOptions = {
-          message:'大変申し訳ありませんが、入力がない状態が一定時間経過したため、認証を解除しました。最初の画面から再度申込を実施してください。',
+          message:'大変申し訳ありませんが、一定時間経過したため、最初の画面から再度申込を実施してください。',
+          buttons: [
+            {
+              text: 'OK',
+              handler: () => {
+                this.navCtrl.navigateBack("check-in-ng");
+                reject();
+              }
+            }
+          ]
+        }
+        this.getAuthToken();
+        if(loading){
+          loading.dismiss();
+        }
+        this.alertService.present(opts);
+      }else if(err.status.toString() === "411"){
+        let opts: AlertOptions = {
+          message:'写真の中で複数顔が存在します、再度撮影してください。',
+          buttons: [
+            {
+              text: 'OK',
+              handler: () => {
+                this.navCtrl.navigateBack("check-in-ng");
+                reject();
+              }
+            }
+          ]
+        }
+        this.getAuthToken();
+        if(loading){
+          loading.dismiss();
+        }
+        this.alertService.present(opts);
+      }else if(err.status.toString() === "412"){
+        let opts: AlertOptions = {
+          message:'写真の中で顔が検知されていません、再度撮影してください。',
+          buttons: [
+            {
+              text: 'OK',
+              handler: () => {
+                this.navCtrl.navigateBack("check-in-ng");
+                reject();
+              }
+            }
+          ]
+        }
+        this.getAuthToken();
+        if(loading){
+          loading.dismiss();
+        }
+        this.alertService.present(opts);
+      }else if(err.status.toString() === "413"){
+        let opts: AlertOptions = {
+          message:'写真が認識されていません、再度撮影してください。',
           buttons: [
             {
               text: 'OK',

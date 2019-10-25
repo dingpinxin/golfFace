@@ -32,13 +32,19 @@ export class CheckInPage implements OnInit {
   async submitPhoto(file: File){
     const loading = await this.loadingCtrl.create({
       spinner: 'lines',
-      message: 'EVAへ問い合わせ中です'
+      message: '顔認証中です、少々待ちください。'
     });
     loading.present();
     let photo = this.shareDataService.getPhotos();
     this.necEvaService.postPictureAndGetPerson(file).pipe(take(1)).subscribe(ref =>{
       console.log(ref);
       loading.dismiss();
+      if(ref.firstName){
+        this.shareDataService.setUserName(ref.firstName)
+        this.applyEvent();
+      }else{
+        this.navCtrl.navigateForward('check-in-ng');
+      }
     }); 
   }
 
@@ -64,14 +70,6 @@ export class CheckInPage implements OnInit {
         img_transformed.onload = () => {
           this.shareDataService.setPhotos({image:img_transformed.src});
           this.submitPhoto(file);
-          /*onLoadCallback();
-          setTimeout(()=>{
-            if(img_transformed.src){
-              if ( isFirstCallback ) {
-                isFirstCallback();
-              }
-            }
-          }, 200)*/
         }
       }
     });
