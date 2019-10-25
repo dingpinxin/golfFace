@@ -8,7 +8,7 @@ import { ShareDataService } from 'src/app/providers/share-data.service';
   styleUrls: ['./check-in-ng.page.scss'],
 })
 export class CheckInNgPage implements OnInit {
-  photos: { image : string }[];
+  photos: { image : string };
 
   constructor(
     private shareDataService: ShareDataService,

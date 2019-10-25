@@ -45,7 +45,7 @@ export class PracticeBallsStartPage implements OnInit {
         img_transformed.src = img_upload.src;
         img_transformed.onload = () => {
           tmpPhotos.push({image:img_transformed.src});
-          this.shareDataService.setPhotos(tmpPhotos);
+          this.shareDataService.setPhotos({image:img_transformed.src});
           onLoadCallback();
           setTimeout(()=>{
             if(tmpPhotos.length === 1){

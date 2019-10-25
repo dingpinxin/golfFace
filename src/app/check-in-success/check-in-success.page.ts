@@ -7,7 +7,7 @@ import { ShareDataService } from 'src/app/providers/share-data.service';
   styleUrls: ['./check-in-success.page.scss'],
 })
 export class CheckInSuccessPage implements OnInit {
-  photos: { image : string }[];
+  photos: { image : string };
 
   constructor(
     private shareDataService: ShareDataService,) { }
