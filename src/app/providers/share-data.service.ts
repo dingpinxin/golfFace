@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class ShareDataService {
   
-  private photos: { image : string }[];
+  private photos: { image : string };
   private balls: number;
 
   constructor() { }
@@ -14,7 +14,7 @@ export class ShareDataService {
    * 写真アップロード画面と写真加工画面との間で共有する写真データを設定
    * @param photos 
    */
-  setPhotos(photos: {image: string}[]){
+  setPhotos(photos: {image: string}){
     this.photos = photos;
   }
 

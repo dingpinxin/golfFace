@@ -216,11 +216,11 @@ export class UserInfoInputPage implements OnInit {
   }
 
   getCount(){
-    this.necEvaService.getPersonsCount().subscribe(res=>{
-      let count = res;
-      console.log(count);
-    }, error=>{
-      console.error(error);
-    })
+    this.necEvaService.getPersonsCount().subscribe(res =>{
+    this.quotationForm = this.formBuilder.group({
+      firstNameKanji: res.count,
+    });
+      console.log(res);
+    }); 
   }
 }

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, LoadingController } from '@ionic/angular';
 import { ShareDataService } from 'src/app/providers/share-data.service';
 import { AlertController } from '@ionic/angular';
+import { NecEvaService } from 'src/app/providers/nec-eva.service';
+import { take } from 'rxjs/operators'
 
 @Component({
   selector: 'app-check-in',
@@ -12,45 +14,32 @@ export class CheckInPage implements OnInit {
 
   constructor(public alertController: AlertController,
     private navCtrl: NavController,
-    private shareDataService: ShareDataService,) { }
+    private loadingCtrl: LoadingController,
+    private shareDataService: ShareDataService,
+    private necEvaService: NecEvaService,) { }
 
   ngOnInit() {
   }
 
   async onChangeInput(event) {
-    const alert = await this.alertController.create({
-      header: '購入内容確認',
-      message: '認証成功とNG画面遷移を選択してください',
-      buttons: [
-        {
-          text: 'NG',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            this.navCtrl.navigateForward('check-in-ng');
-          }
-        }, {
-          text: '成功',
-          handler: () => {
-            this.commonOnChangeInput(event,this.applyEvent.bind(this));
-          }
-        }
-      ]
+    this.commonOnChangeInput(event,this.applyEvent.bind(this));
+  }
+
+  async applyEvent() {
+      this.navCtrl.navigateForward('check-in-success');
+  }
+  
+  async submitPhoto(file: File){
+    const loading = await this.loadingCtrl.create({
+      spinner: 'lines',
+      message: 'EVAへ問い合わせ中です'
     });
-
-    await alert.present();
-  }
-
-  applyEvent() {
-        this.navCtrl.navigateForward('check-in-success');
-  }
-
-  onChangeInput_false(event) {
-    this.commonOnChangeInput(event,this.applyEvent_fail.bind(this));
-  }
-
-  applyEvent_fail() {
-        this.navCtrl.navigateForward('check-in-ng');
+    loading.present();
+    let photo = this.shareDataService.getPhotos();
+    this.necEvaService.postPictureAndGetPerson(file).pipe(take(1)).subscribe(ref =>{
+      console.log(ref);
+      loading.dismiss();
+    }); 
   }
 
    /**
@@ -73,16 +62,16 @@ export class CheckInPage implements OnInit {
       img_upload.onload = () => {
         img_transformed.src = img_upload.src;
         img_transformed.onload = () => {
-          tmpPhotos.push({image:img_transformed.src});
-          this.shareDataService.setPhotos(tmpPhotos);
-          onLoadCallback();
+          this.shareDataService.setPhotos({image:img_transformed.src});
+          this.submitPhoto(file);
+          /*onLoadCallback();
           setTimeout(()=>{
-            if(tmpPhotos.length === 1){
+            if(img_transformed.src){
               if ( isFirstCallback ) {
                 isFirstCallback();
               }
             }
-          }, 200)
+          }, 200)*/
         }
       }
     });
