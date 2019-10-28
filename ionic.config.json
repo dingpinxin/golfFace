@@ -1,5 +1,9 @@
 {
-  "name": "golfFace",
-  "integrations": {},
-  "type": "angular"
+    "name": "golfFace",
+    "integrations": {},
+    "type": "angular",
+    "proxies": [{
+        "path": "api/persons/count",
+        "proxyUrl": "https://192.168.100.106:24328/persons/count"
+    }]
 }

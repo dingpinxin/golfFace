@@ -11,7 +11,8 @@ import { AlertService } from 'src/app/providers/alert.service';
 export class NecEvaService {
 
   //固定パラメータ
-  private readonly URL = 'https://192.168.100.106:24328/';
+  private readonly URL1 = 'https://192.168.100.106:24328/';
+  private readonly URL = 'http://192.168.100.101:8100/api/';
 
   constructor(private http: HttpClient,
     private alertService: AlertService,
