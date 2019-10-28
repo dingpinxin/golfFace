@@ -1,19 +1,25 @@
 <ion-header>
-  <ion-toolbar color='primary'>
-    <ion-title>購入内容選択</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color='primary'>
+        <ion-title>購入内容選択</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen>
-  <ion-row style="height:80%;">
-    <ion-col>
-      <div id="centerMarker1" (click)="presentAlertConfirm(1);" tappable><span class="target">ボール20球<br>400円</span></div>
-    </ion-col>
-    <ion-col>
-      <div id="centerMarker2" (click)="presentAlertConfirm(2);" tappable><span class="target">ボール40球<br>800円</span></div>
-    </ion-col>
-    <ion-col>
-      <div id="centerMarker3" (click)="presentAlertConfirm(3);" tappable><span class="target">ボール60球<br>1200円</span></div>
-    </ion-col>
-  </ion-row>
+    <ion-card>
+        <ion-card-header>
+            <ion-card-subtitle>2019年10月01日</ion-card-subtitle>
+            <ion-card-title color='success'>{{this.username}}さま、ゴルフ練習場へようこそ！</ion-card-title>
+        </ion-card-header>
+    </ion-card>
+    <ion-row style="height:80%;">
+        <ion-col>
+            <div id="centerMarker1" (click)="presentAlertConfirm(1);" tappable><span class="target">ボール20球<br>400円</span></div>
+        </ion-col>
+        <ion-col>
+            <div id="centerMarker2" (click)="presentAlertConfirm(2);" tappable><span class="target">ボール40球<br>800円</span></div>
+        </ion-col>
+        <ion-col>
+            <div id="centerMarker3" (click)="presentAlertConfirm(3);" tappable><span class="target">ボール60球<br>1200円</span></div>
+        </ion-col>
+    </ion-row>
 </ion-content>

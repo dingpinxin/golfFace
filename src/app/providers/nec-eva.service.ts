@@ -63,7 +63,7 @@ export class NecEvaService {
    * 撮影した顔のサーチメソッド
    * @param quote 写真
    */
-  postPictureAndGetPerson(file) {
+  postPictureAndGetPerson(file,ngUrl) {
       const body = new FormData();
       body.append('picture', file);
       body.append('Content-Type', 'multipart/form-data');
@@ -77,12 +77,12 @@ export class NecEvaService {
         concatMap((res: { personId:string,matchScore:number }) => {
           console.log(res);
           if(res.matchScore > 0.8){
-            return this.getPersonInfo(res.personId)
+            return this.getPersonInfo(res.personId);
           }else{
-
+            this.handleNoperson(ngUrl);
           }
         }),
-        catchError(err => this.handleErrorImg(err))
+        catchError(err => this.handleErrorImg(err,ngUrl))
       )
   }
 
@@ -112,8 +112,30 @@ export class NecEvaService {
     }
     return option;
   }
+
+  handleNoperson(ngurl: string){
+    return new Promise<any>(async (resolve, reject) => {
+      const loading = await this.loadingCtrl.getTop();
+      let opts: AlertOptions = {
+        message:'顔情報はまだ登録していないです、登録してください。',
+        buttons: [
+          {
+            text: 'OK',
+            handler: () => {
+              this.navCtrl.navigateBack(ngurl);
+              reject();
+            }
+          }
+        ]
+      }
+      if(loading){
+        loading.dismiss();
+      }
+      this.alertService.present(opts);
+    })
+  }
   
-  handleErrorImg(err){
+  handleErrorImg(err,ngurl: string){
     console.log(err);
     return new Promise<any>(async (resolve, reject) => {
       const loading = await this.loadingCtrl.getTop();
@@ -124,7 +146,7 @@ export class NecEvaService {
             {
               text: 'OK',
               handler: () => {
-                this.navCtrl.navigateBack("check-in-ng");
+                this.navCtrl.navigateBack(ngurl);
                 reject();
               }
             }
@@ -134,7 +156,7 @@ export class NecEvaService {
         if(loading){
           loading.dismiss();
         }
-        this.alertService.present(opts);
+        this.alertService.present(err);
       }else if(err.status.toString() === "411"){
         let opts: AlertOptions = {
           message:'写真の中で複数顔が存在します、再度撮影してください。',
@@ -142,7 +164,7 @@ export class NecEvaService {
             {
               text: 'OK',
               handler: () => {
-                this.navCtrl.navigateBack("check-in-ng");
+                this.navCtrl.navigateBack(ngurl);
                 reject();
               }
             }
@@ -160,7 +182,7 @@ export class NecEvaService {
             {
               text: 'OK',
               handler: () => {
-                this.navCtrl.navigateBack("check-in-ng");
+                this.navCtrl.navigateBack(ngurl);
                 reject();
               }
             }
@@ -178,7 +200,7 @@ export class NecEvaService {
             {
               text: 'OK',
               handler: () => {
-                this.navCtrl.navigateBack("quotation/input");
+                this.navCtrl.navigateBack(ngurl);
                 reject();
               }
             }
@@ -193,7 +215,7 @@ export class NecEvaService {
         if(loading){
           loading.dismiss();
         }
-        this.alertService.unexpected();
+        this.alertService.present(err);
       }
     })
   }

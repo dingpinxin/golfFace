@@ -36,7 +36,7 @@ export class CheckInPage implements OnInit {
     });
     loading.present();
     let photo = this.shareDataService.getPhotos();
-    this.necEvaService.postPictureAndGetPerson(file).pipe(take(1)).subscribe(ref =>{
+    this.necEvaService.postPictureAndGetPerson(file,'check-in-ng').pipe(take(1)).subscribe(ref =>{
       console.log(ref);
       loading.dismiss();
       if(ref.firstName){

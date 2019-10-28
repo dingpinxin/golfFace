@@ -1,9 +1,24 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>practice-balls-ng</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color='primary'>
+        <ion-title>ボール購入NG</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+    <ion-card>
+        <ion-card-header>
+            <ion-card-subtitle>2019年10月01日</ion-card-subtitle>
+            <ion-card-title color='danger'>認証できませんでした。</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            ボール購入画面に戻り、再度認証してください。
+        </ion-card-content>
+    </ion-card>
+    <section class='btn-container'>
+        <ion-button class='submit-btn upload-btn' (click)='goNextPage()'>
+            <label>
+              ボール購入画面へ
+        </label>
+        </ion-button>
+    </section>
 </ion-content>

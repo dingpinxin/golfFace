@@ -10,12 +10,14 @@ import { NavController } from '@ionic/angular';
 export class PracticeBallsBuyPage implements OnInit {
 
   balls: number;
+  username: string;
 
-  constructor(private shareData: ShareDataService,
+  constructor(private shareDataService: ShareDataService,
     private navCtrl: NavController,) { }
 
   ngOnInit() {
-    this.balls = this.shareData.getballs();
+    this.balls = this.shareDataService.getballs();
+    this.username = this.shareDataService.getUserName();
   }
 
   goNextPage(){

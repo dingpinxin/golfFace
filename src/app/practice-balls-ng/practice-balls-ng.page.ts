@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ShareDataService } from 'src/app/providers/share-data.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-practice-balls-ng',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PracticeBallsNgPage implements OnInit {
 
-  constructor() { }
+  constructor(private shareDataService: ShareDataService,
+    private navCtrl: NavController,) { }
 
   ngOnInit() {
+  }
+
+  goNextPage(){
+    this.navCtrl.navigateForward('practice-balls-start');
   }
 
 }

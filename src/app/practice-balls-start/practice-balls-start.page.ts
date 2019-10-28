@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, LoadingController } from '@ionic/angular';
 import { ShareDataService } from 'src/app/providers/share-data.service';
+import { AlertController } from '@ionic/angular';
+import { NecEvaService } from 'src/app/providers/nec-eva.service';
+import { take } from 'rxjs/operators'
 
 @Component({
   selector: 'app-practice-balls-start',
@@ -9,9 +12,11 @@ import { ShareDataService } from 'src/app/providers/share-data.service';
 })
 export class PracticeBallsStartPage implements OnInit {
 
-  constructor(
+  constructor(public alertController: AlertController,
     private navCtrl: NavController,
-    private shareDataService: ShareDataService,) { }
+    private loadingCtrl: LoadingController,
+    private shareDataService: ShareDataService,
+    private necEvaService: NecEvaService,) { }
 
   ngOnInit() {
   }
@@ -22,6 +27,25 @@ export class PracticeBallsStartPage implements OnInit {
 
   applyEvent() {
     this.navCtrl.navigateForward('practice-balls-success');
+  }
+
+  async submitPhoto(file: File){
+    const loading = await this.loadingCtrl.create({
+      spinner: 'lines',
+      message: '顔認証中です、少々待ちください。'
+    });
+    loading.present();
+    let photo = this.shareDataService.getPhotos();
+    this.necEvaService.postPictureAndGetPerson(file,'practice-balls-ng').pipe(take(1)).subscribe(ref =>{
+      console.log(ref);
+      loading.dismiss();
+      if(ref.firstName){
+        this.shareDataService.setUserName(ref.firstName)
+        this.applyEvent();
+      }else{
+        this.navCtrl.navigateForward('practice-balls-ng');
+      }
+    }); 
   }
 
    /**
@@ -44,20 +68,11 @@ export class PracticeBallsStartPage implements OnInit {
       img_upload.onload = () => {
         img_transformed.src = img_upload.src;
         img_transformed.onload = () => {
-          tmpPhotos.push({image:img_transformed.src});
           this.shareDataService.setPhotos({image:img_transformed.src});
-          onLoadCallback();
-          setTimeout(()=>{
-            if(tmpPhotos.length === 1){
-              if ( isFirstCallback ) {
-                isFirstCallback();
-              }
-            }
-          }, 200)
+          this.submitPhoto(file);
         }
       }
     });
     reader.readAsDataURL(file);
   }
-
 }

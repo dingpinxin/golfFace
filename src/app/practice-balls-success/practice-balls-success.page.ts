@@ -9,12 +9,14 @@ import { ShareDataService } from 'src/app/providers/share-data.service';
   styleUrls: ['./practice-balls-success.page.scss'],
 })
 export class PracticeBallsSuccessPage implements OnInit {
+  username: string;
 
   constructor(public alertController: AlertController,
     private navCtrl: NavController,
-    private shareData: ShareDataService,) { }
+    private shareDataService: ShareDataService,) { }
 
   ngOnInit() {
+    this.username = this.shareDataService.getUserName();
   }
 
   async presentAlertConfirm(mode) {
@@ -44,13 +46,13 @@ export class PracticeBallsSuccessPage implements OnInit {
           text: 'OK',
           handler: () => {
             if(mode == 1){
-              this.shareData.setBalls(20);
+              this.shareDataService.setBalls(20);
         
             }else if(mode == 2){
-              this.shareData.setBalls(40);
+              this.shareDataService.setBalls(40);
         
             }else{
-              this.shareData.setBalls(60);
+              this.shareDataService.setBalls(60);
             }
             this.gotoNextPage(mode);
           }
