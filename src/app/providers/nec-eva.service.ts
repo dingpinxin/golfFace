@@ -11,8 +11,7 @@ import { AlertService } from 'src/app/providers/alert.service';
 export class NecEvaService {
 
   //固定パラメータ
-  private readonly URL1 = 'https://192.168.100.106:24328/';
-  private readonly URL = 'http://192.168.100.101:8100/api/';
+  private readonly URL = 'https://evaapp.my.net:8100/api/';
 
   constructor(private http: HttpClient,
     private alertService: AlertService,
@@ -30,7 +29,7 @@ export class NecEvaService {
         headers: { 
           'Access-Control-Allow-Origin': '*',
           'Content-Type': 'application/json',
-          'Authorization': 'Basic cm9vdHVzZXI6cm9vdHVzZXI=',
+          'Authorization': 'Basic ' + btoa("rootuser:rootuser"),
         }
       }).toPromise();
       console.log(res.count);
