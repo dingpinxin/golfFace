@@ -11,7 +11,7 @@ import { AlertService } from 'src/app/providers/alert.service';
 export class NecEvaService {
 
   //固定パラメータ
-  private readonly URL = 'https://evaapp.my.net:8100/api/';
+  private readonly URL = 'https://localhost:8100/api/';
 
   constructor(private http: HttpClient,
     private alertService: AlertService,

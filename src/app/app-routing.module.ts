@@ -13,6 +13,13 @@ const routes: Routes = [
   { path: 'check-in-ng', loadChildren: './check-in-ng/check-in-ng.module#CheckInNgPageModule' },
   { path: 'practice-balls-buy', loadChildren: './practice-balls-buy/practice-balls-buy.module#PracticeBallsBuyPageModule' },
   { path: 'practice-balls-ng', loadChildren: './practice-balls-ng/practice-balls-ng.module#PracticeBallsNgPageModule' },
+  {
+    path: '',
+    loadChildren: () => import('./restaurant-success/restaurant-success.module').then(m => m.RestaurantSuccessPageModule)
+  },
+  { path: 'restaurant-start', loadChildren: './restaurant-start/restaurant-start.module#RestaurantStartPageModule' },
+  { path: 'restaurant-ng', loadChildren: './restaurant-ng/restaurant-ng.module#RestaurantNgPageModule' },
+
 ];
 
 @NgModule({

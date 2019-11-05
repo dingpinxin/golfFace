@@ -28,6 +28,7 @@ export class UserMenuPage implements OnInit {
     this.navCtrl.navigateForward('practice-balls-start');
   }
 
-  gotoRestrant() {
+  gotoRestaurant() {
+    this.navCtrl.navigateForward('restaurant-start');
   }
 }

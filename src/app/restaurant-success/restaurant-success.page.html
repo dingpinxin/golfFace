@@ -1,0 +1,20 @@
+<ion-tabs>
+    <ion-tab-bar slot="top">
+        <ion-label class="my-label">{{this.username}}様、ゴルフ場レストランへようこそ！</ion-label>
+        <ion-label class="class=" ion-align-self-end color="primary">「Table No.3」 </ion-label>
+    </ion-tab-bar>
+    <ion-tab-bar slot="bottom">
+
+        <ion-tab-button tab="restaurant-menu">
+            <ion-icon name="home"></ion-icon>
+            <ion-label>料理メニュー</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="restaurant-order">
+            <ion-icon name="cart"></ion-icon>
+            <ion-label>注文内容</ion-label>
+            <ion-badge color="danger">{{cartCount}}</ion-badge>
+        </ion-tab-button>
+    </ion-tab-bar>
+
+</ion-tabs>

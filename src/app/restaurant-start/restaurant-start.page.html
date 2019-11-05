@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-toolbar color='primary'>
+        <ion-title>レストラン注文</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class='img-div'>
+        <img class='image-golf' src='../../assets/imgs/food1_1800.jpg' />
+    </div>
+    <ion-card>
+        <ion-card-header>
+            <ion-card-subtitle>2019年10月01日</ion-card-subtitle>
+            <ion-card-title>レストランへようこそ！</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            メニューボタンを押下して注文してください。
+        </ion-card-content>
+    </ion-card>
+    <section class='btn-container'>
+        <ion-button class='submit-btn upload-btn'>
+            <label>
+          メニュー<input type='file' accept='image/*' (change)='onChangeInput($event, true)'/>
+        </label>
+        </ion-button>
+    </section>
+</ion-content>

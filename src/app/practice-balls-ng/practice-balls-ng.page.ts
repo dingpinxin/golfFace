@@ -16,7 +16,7 @@ export class PracticeBallsNgPage implements OnInit {
   }
 
   goNextPage(){
-    this.navCtrl.navigateForward('practice-balls-start');
+    this.navCtrl.navigateForward('restaurant-start');
   }
 
 }

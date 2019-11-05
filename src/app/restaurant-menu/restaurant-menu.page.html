@@ -1,0 +1,74 @@
+<ion-header>
+    <ion-toolbar color='primary'>
+        <ion-title>
+            料理メニュー
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <!-- 
+  <ion-list>
+    <ion-item *ngFor="let product of productlists; let i = index">
+      <ion-thumbnail slot="start">
+        <img src="{{product.img}}">
+      </ion-thumbnail>
+      <ion-label  (click)="navigate(i)" mode="md" class="my-label">
+        {{product.label}}
+      </ion-label>
+
+      <ion-label class= "my-label">
+          {{product.price}}（円）
+        </ion-label>
+      <ion-button (click)="addToCart(i)" size="large">
+          <ion-icon name="cart" slot="end" size="40"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+-->
+    <ion-row style="height:40%;" class="col">
+        <ion-col>
+            <div id="centerMarker1" (click)="addToCart(0);" tappable>
+                <img src="{{productlists[0].img}}" scroll="false" width="70%">
+                <span class="target"><br>パワーランチ　1,800円</span>
+            </div>
+        </ion-col>
+        <ion-col>
+            <div id="centerMarker2" (click)="addToCart(1);" tappable>
+                <img src="{{productlists[1].img}}" scroll="false" width="70%">
+                <span class="target"><br>富岡御膳　2,600円</span>
+            </div>
+        </ion-col>
+        <ion-col>
+            <div id="centerMarker3" (click)="addToCart(2);" tappable>
+                <img src="{{productlists[2].img}}" scroll="false" width="70%">
+                <span class="target"><br>トンテキ　1,630円</span>
+            </div>
+        </ion-col>
+    </ion-row>
+    <ion-row style="height:10%;">
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+    </ion-row>
+    <ion-row style="height:50%;" class="col">
+        <ion-col>
+            <div id="centerMarker1" (click)="addToCart(4);" tappable>
+                <img src="{{productlists[4].img}}" scroll="false" width="70%">
+                <span class="target"><br>オレンジジュース　500円</span>
+            </div>
+        </ion-col>
+        <ion-col>
+            <div id="centerMarker2" (click)="addToCart(6);" tappable>
+                <img src="{{productlists[6].img}}" scroll="false" width="70%">
+                <span class="target"><br>ワイン（赤１グラス） 600円</span>
+            </div>
+        </ion-col>
+        <ion-col>
+            <div id="centerMarker3" (click)="addToCart(7);" tappable>
+                <img src="{{productlists[7].img}}" scroll="false" width="70%">
+                <span class="target"><br>ワイン（赤１グラス） 600円</span>
+            </div>
+        </ion-col>
+    </ion-row>
+</ion-content>
