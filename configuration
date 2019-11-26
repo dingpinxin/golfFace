@@ -1,0 +1,31 @@
+
+get /instances/{instanceId}/configuration 
+
+{
+  "database": "biometrics_db",
+  "detectionAlgorithm": "neofacev3-d11"
+}
+
+
+
+
+
+get /instances/{instanceId}/expandedConfiguration 
+
+{
+  "database": {
+    "name": "biometrics_db",
+    "connectionString": "hostaddr=192.168.100.109 port=5432 dbname=pulse_database_biometrics_db user=postgres password=evadb01"
+  },
+  "detectionAlgorithm": "neofacev3-d11",
+  "terminateMode": "abort",
+  "instanceId": 4,
+  "node": "192.168.100.109",
+  "authenticationToken": "1983cfac-d3d3-4de9-a3c0-648aecad0e77",
+  "notificationAddress": {
+    "url": "tcp://*:20877",
+    "zmqSecurity": "off"
+  },
+  "biometricsManagerService": 23822,
+  "masterAddress": "https://127.0.0.1:3000"
+}
